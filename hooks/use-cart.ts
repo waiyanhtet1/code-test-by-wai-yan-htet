@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const cartStorageKey = "appi-cart";
 
@@ -42,7 +42,13 @@ function writeStoredCart(cart: CartItem[]) {
 }
 
 export function useCart() {
-  const [cart, setCart] = useState<CartItem[]>(readStoredCart);
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    window.requestAnimationFrame(() => {
+      setCart(readStoredCart());
+    });
+  }, []);
 
   const addToCart = (item: Omit<CartItem, "quantity">) => {
     setCart((currentCart) => {

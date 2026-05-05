@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Locale, locales } from "@/data/product-content";
 
 const localeStorageKey = "appi-locale";
@@ -12,19 +12,17 @@ function isLocale(value: string | null): value is Locale {
 }
 
 export function usePersistedLocale() {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    if (typeof window === "undefined") {
-      return defaultLocale;
-    }
+  const [locale, setLocaleState] = useState<Locale>(defaultLocale);
 
+  useEffect(() => {
     const storedLocale = window.localStorage.getItem(localeStorageKey);
 
     if (isLocale(storedLocale)) {
-      return storedLocale;
+      window.requestAnimationFrame(() => {
+        setLocaleState(storedLocale);
+      });
     }
-
-    return defaultLocale;
-  });
+  }, []);
 
   const setLocale = (nextLocale: Locale) => {
     setLocaleState(nextLocale);
