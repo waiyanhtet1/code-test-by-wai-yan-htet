@@ -1,6 +1,10 @@
+"use client";
+
 import { Locale, ProductLocaleContent } from "@/data/product-content";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { LocaleSwitcher } from "./locale-switcher";
 
 type SiteHeaderProps = {
@@ -16,45 +20,81 @@ export function SiteHeader({
   onLocaleChange,
   activePath = "/",
 }: SiteHeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <header className="border-b border-line-soft bg-surface">
-      <div className="mx-auto flex max-w-[1180px] flex-col gap-5 px-4 py-6 lg:flex-row lg:items-center lg:justify-between lg:px-0">
-        <Link
-          href="/"
-          className="flex shrink-0 items-center gap-3 text-brand-logo"
-        >
-          <Image
-            src="/logo.png"
-            alt={content.brand}
-            width={210}
-            height={27}
-            priority
-            className="h-auto w-[210px]"
-          />
-        </Link>
+      <div className="mx-auto flex max-w-[1380px] flex-col px-4 lg:px-10 py-6 lg:flex-row lg:items-center lg:justify-between lg:px-0">
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-3 text-brand-logo"
+            onClick={closeMenu}
+          >
+            <Image
+              src="/logo.png"
+              alt={content.brand}
+              width={210}
+              height={27}
+              priority
+              className="h-auto w-[210px]"
+            />
+          </Link>
 
-        <div className="flex flex-1 flex-col gap-5 lg:ml-16 lg:flex-row lg:items-center lg:justify-between">
-          <nav className="flex-1" aria-label="Primary navigation">
-            <ul className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm tracking-[0.16em] text-ink sm:text-base">
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((current) => !current)}
+            className="grid h-11 w-11 place-items-center border border-line text-ink transition hover:border-brand hover:text-brand lg:hidden"
+            aria-label={
+              isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={isMenuOpen}
+            aria-controls="site-navigation"
+          >
+            {isMenuOpen ? (
+              <X aria-hidden="true" className="h-5 w-5" />
+            ) : (
+              <Menu aria-hidden="true" className="h-5 w-5" />
+            )}
+          </button>
+        </div>
+
+        <div
+          id="site-navigation"
+          className={`${isMenuOpen ? "grid" : "hidden"
+            } gap-5 border-t border-line pt-5 lg:mt-0 lg:flex lg:ml-10 lg:border-t-0 lg:pt-0 lg:items-center lg:flex-1 lg:justify-between`}
+        >
+          <nav aria-label="Primary navigation">
+            <ul className="grid gap-4 text-sm tracking-[0.16em] text-ink sm:text-base lg:flex lg:flex-wrap lg:items-center lg:justify-between lg:gap-x-4 lg:gap-y-2">
               {content.nav.map((item, index) => (
-                <li key={item} className="flex items-center gap-4">
+                <li
+                  key={item}
+                  className="flex items-center justify-between gap-4 lg:justify-start"
+                >
                   {index <= 1 ? (
                     <Link
                       href={index === 1 ? "/list" : "/"}
                       className={`transition hover:text-brand ${activePath === (index === 1 ? "/list" : "/")
-                          ? "text-brand"
-                          : ""
+                        ? "text-brand"
+                        : ""
                         }`}
+                      onClick={closeMenu}
                     >
                       {item}
                     </Link>
                   ) : (
-                    <a href="#" className="transition hover:text-brand">
+                    <a
+                      href="#"
+                      className="transition hover:text-brand"
+                      onClick={closeMenu}
+                    >
                       {item}
                     </a>
                   )}
                   {index < content.nav.length - 1 ? (
-                    <span className="text-ink-muted">/</span>
+                    <span className="hidden text-ink-muted lg:inline">/</span>
                   ) : null}
                 </li>
               ))}

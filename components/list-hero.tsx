@@ -9,7 +9,7 @@ export function ListHero({ title }: ListHeroProps) {
     <section className="relative overflow-hidden bg-surface-hero">
       <div className="relative mx-auto h-[240px] max-w-[1440px] sm:h-[300px]">
         <Image
-          src="/products/soup-bowl-hero-3.png"
+          src="/products/soup-bowl-hero-1.png"
           alt=""
           fill
           priority
