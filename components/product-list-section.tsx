@@ -1,18 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShoppingCart } from "lucide-react";
 import { ProductListContent } from "@/data/list-content";
+import { CartItem } from "@/hooks/use-cart";
 
 type ProductListSectionProps = {
   index: number;
   section: ProductListContent["sections"][number];
   allProductsLabel: (category: string) => string;
+  addToCartLabel: string;
+  onAddToCart: (item: Omit<CartItem, "quantity">) => void;
 };
 
 export function ProductListSection({
   index,
   section,
   allProductsLabel,
+  addToCartLabel,
+  onAddToCart,
 }: ProductListSectionProps) {
   return (
     <section id={`section-${index}`} className="relative py-16 sm:py-20">
@@ -51,6 +56,21 @@ export function ProductListSection({
                   {product.price}
                 </p>
               </Link>
+              <button
+                type="button"
+                onClick={() =>
+                  onAddToCart({
+                    id: product.code,
+                    image: product.image,
+                    name: product.name,
+                    price: product.price,
+                  })
+                }
+                className="mt-4 inline-flex min-h-10 items-center justify-center gap-2 border border-brand px-4 py-2 text-xs tracking-[0.08em] text-brand transition hover:bg-brand hover:text-page-white"
+              >
+                <ShoppingCart aria-hidden="true" className="h-4 w-4" />
+                {addToCartLabel}
+              </button>
             </article>
           ))}
         </div>

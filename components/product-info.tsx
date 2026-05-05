@@ -1,11 +1,15 @@
-import { ChevronRight } from "lucide-react";
-import { ProductLocaleContent } from "@/data/product-content";
+import { ChevronRight, ShoppingCart } from "lucide-react";
+import { ProductLocaleContent, productImages } from "@/data/product-content";
+import { CartItem } from "@/hooks/use-cart";
 
 type ProductInfoProps = {
   content: ProductLocaleContent;
+  onAddToCart: (item: Omit<CartItem, "quantity">) => void;
 };
 
-export function ProductInfo({ content }: ProductInfoProps) {
+export function ProductInfo({ content, onAddToCart }: ProductInfoProps) {
+  const productCode = content.detailRows[0]?.[1] ?? content.title;
+
   return (
     <section className="text-ink">
       <h1 className="border-b border-brand pb-4 text-2xl leading-snug tracking-[0.08em] text-brand sm:text-[28px]">
@@ -41,6 +45,22 @@ export function ProductInfo({ content }: ProductInfoProps) {
         <span className="text-3xl text-brand">{content.price}</span>
         <span className="text-base">{content.tax}</span>
       </p>
+
+      <button
+        type="button"
+        onClick={() =>
+          onAddToCart({
+            id: productCode,
+            image: productImages[0]?.src,
+            name: content.title,
+            price: `${content.price}${content.tax}`,
+          })
+        }
+        className="mt-8 flex min-h-12 w-full items-center justify-center gap-3 border border-brand px-6 py-3 text-base tracking-[0.08em] text-brand transition hover:bg-brand hover:text-page-white"
+      >
+        <ShoppingCart aria-hidden="true" className="h-5 w-5" />
+        {content.cart.add}
+      </button>
 
       <a
         href="#"

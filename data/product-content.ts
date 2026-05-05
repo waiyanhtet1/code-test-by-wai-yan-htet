@@ -46,6 +46,13 @@ export const productContent = {
     price: "6,480円",
     tax: "（税込）送料別",
     cta: "商品購入のお問い合わせはこちら",
+    cart: {
+      add: "カートに追加",
+      label: "カート",
+      empty: "カートに商品がありません",
+      quantity: "数量",
+      remove: "削除",
+    },
     related: [
       { name: "汁椀 3.8寸（ミズメザクラ）", price: "6,480円（税込）" },
       { name: "汁椀 4寸（ミズメザクラ）", price: "7,020円（税込）" },
@@ -80,6 +87,13 @@ export const productContent = {
     price: "¥6,480",
     tax: "tax included, shipping separate",
     cta: "Contact us about purchasing",
+    cart: {
+      add: "Add to cart",
+      label: "Cart",
+      empty: "Your cart is empty",
+      quantity: "Qty",
+      remove: "Remove",
+    },
     related: [
       { name: "Soup bowl 3.8 sun (Mizumezakura)", price: "¥6,480 tax included" },
       { name: "Soup bowl 4 sun (Mizumezakura)", price: "¥7,020 tax included" },
@@ -114,6 +128,13 @@ export const productContent = {
     price: "¥6,480",
     tax: "အခွန်ပါပြီး၊ ပို့ခ သီးခြား",
     cta: "ဝယ်ယူရန် စုံစမ်းမေးမြန်းမည်",
+    cart: {
+      add: "စျေးခြင်းထဲ ထည့်ရန်",
+      label: "စျေးခြင်း",
+      empty: "စျေးခြင်းထဲတွင် ပစ္စည်းမရှိသေးပါ",
+      quantity: "အရေအတွက်",
+      remove: "ဖယ်ရှားရန်",
+    },
     related: [
       { name: "ဟင်းချိုခွက် ၃.၈ ဆွန်", price: "¥6,480 အခွန်ပါ" },
       { name: "ဟင်းချိုခွက် ၄ ဆွန်", price: "¥7,020 အခွန်ပါ" },
@@ -144,6 +165,13 @@ export type ProductLocaleContent = {
   price: string;
   tax: string;
   cta: string;
+  cart: {
+    add: string;
+    label: string;
+    empty: string;
+    quantity: string;
+    remove: string;
+  };
   related: Array<{ name: string; price: string }>;
   footer: {
     address: string;

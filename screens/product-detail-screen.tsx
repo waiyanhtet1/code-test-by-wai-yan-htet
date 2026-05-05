@@ -6,12 +6,14 @@ import { ProductInfo } from "@/components/product-info";
 import { RelatedProducts } from "@/components/related-products";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { Locale, productContent } from "@/data/product-content";
+import { productContent } from "@/data/product-content";
+import { useCart } from "@/hooks/use-cart";
+import { usePersistedLocale } from "@/hooks/use-persisted-locale";
 import { ChevronLeft } from "lucide-react";
-import { useState } from "react";
 
 export function ProductDetailScreen() {
-  const [locale, setLocale] = useState<Locale>("ja");
+  const [locale, setLocale] = usePersistedLocale();
+  const { addToCart, cart, cartCount, removeFromCart } = useCart();
   const content = productContent[locale];
 
   return (
@@ -21,13 +23,16 @@ export function ProductDetailScreen() {
         locale={locale}
         onLocaleChange={setLocale}
         activePath="/"
+        cartItems={cart}
+        cartCount={cartCount}
+        onRemoveFromCart={removeFromCart}
       />
       <Breadcrumbs items={content.breadcrumb} />
 
       <main>
         <section className="mx-auto grid max-w-[1180px] gap-10 px-4 py-10 md:grid-cols-[1.04fr_0.9fr] md:gap-10 lg:px-0">
           <HeroCarousel />
-          <ProductInfo content={content} />
+          <ProductInfo content={content} onAddToCart={addToCart} />
         </section>
 
         <section className="mx-auto max-w-[1180px] px-4 pt-8 lg:px-0">
