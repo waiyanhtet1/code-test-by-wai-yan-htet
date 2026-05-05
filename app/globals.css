@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+:root {
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+  --brand: var(--color-brand);
+  --brand-dark: var(--color-brand-dark);
+  --brand-logo: var(--color-brand-logo);
+  --ink: var(--color-ink);
+  --ink-soft: var(--color-ink-soft);
+  --ink-muted: var(--color-ink-muted);
+  --ink-strong: var(--color-ink-strong);
+  --surface: var(--color-surface);
+  --surface-soft: var(--color-surface-soft);
+  --surface-image: var(--color-surface-image);
+  --surface-hero: var(--color-surface-hero);
+  --band: var(--color-band);
+  --band-footer: var(--color-band-footer);
+  --line: var(--color-line);
+  --line-soft: var(--color-line-soft);
+  --line-faint: var(--color-line-faint);
+  --dark-control: var(--color-dark-control);
+  --white: var(--color-page-white);
+  --overlay-soft: var(--color-overlay-soft);
+  --font-geist-sans: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif Myanmar",
+    Georgia, serif;
+  --font-geist-mono: "Courier New", Courier, monospace;
+}
+
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #151515;
+  --color-brand: #c91d25;
+  --color-brand-dark: #a9161d;
+  --color-brand-logo: #d11e25;
+  --color-ink: #151515;
+  --color-ink-soft: #1f1f1f;
+  --color-ink-muted: #777777;
+  --color-ink-strong: #242424;
+  --color-surface: #ffffff;
+  --color-surface-soft: #efefef;
+  --color-surface-image: #d9d9d9;
+  --color-surface-hero: #d8d8d8;
+  --color-band: #e6e6e6;
+  --color-band-footer: #e5e5e5;
+  --color-line: #dedede;
+  --color-line-soft: #e5e5e5;
+  --color-line-faint: #e8e8e8;
+  --color-dark-control: #333333;
+  --color-page-white: #ffffff;
+  --color-overlay-soft: rgb(0 0 0 / 0.1);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans);
+}
+
+button,
+a {
+  cursor: pointer;
+}
